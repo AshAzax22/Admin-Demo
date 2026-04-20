@@ -1,0 +1,79 @@
+.header {
+    height: 70px;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.role {
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--secondary);
+    border-radius: 99px;
+    color: var(--primary);
+}
+
+.store {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.iconBtn {
+    background: none;
+    border: none;
+    color: var(--muted-foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.iconBtn:hover {
+    color: var(--primary);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--destructive);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    transition: background-color 0.2s;
+}
+
+.logoutBtn:hover {
+    background-color: #fee2e2;
+}

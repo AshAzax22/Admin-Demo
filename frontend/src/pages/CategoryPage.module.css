@@ -1,0 +1,214 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.header p {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+.addBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius);
+    border: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.addBtn:hover {
+    background-color: #1e293b;
+    transform: translateY(-1px);
+}
+
+.grid {
+    background-color: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table th {
+    padding: 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--muted-foreground);
+    border-bottom: 1px solid var(--border);
+    background-color: #f8fafc;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem;
+}
+
+.catName {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.code {
+    background-color: var(--secondary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.productBadge {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editBtn, .deleteBtn {
+    background: none;
+    border: 1px solid var(--border);
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.editBtn { color: var(--primary); }
+.editBtn:hover { background-color: var(--secondary); }
+
+.deleteBtn { color: var(--destructive); }
+.deleteBtn:hover { background-color: #fef2f2; border-color: #fecaca; }
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal {
+    background-color: var(--card);
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.formGroup input, .formGroup select, .formGroup textarea {
+    padding: 0.625rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    outline: none;
+}
+
+.formGroup input:focus, .formGroup select:focus, .formGroup textarea:focus {
+    border-color: var(--primary);
+}
+
+.formGroup textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modalActions button:first-child {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.submitBtn {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius);
+    border: none;
+    font-weight: 600;
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+}
+
+.empty {
+    padding: 4rem;
+    text-align: center;
+    color: var(--muted-foreground);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loader {
+    padding: 4rem;
+    text-align: center;
+    color: var(--muted-foreground);
+}

@@ -1,0 +1,294 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.header p {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.searchWrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    color: var(--muted-foreground);
+}
+
+.searchWrapper input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    outline: none;
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+}
+
+.searchWrapper input:focus {
+    border-color: var(--primary);
+}
+
+.tableWrapper {
+    background-color: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table th {
+    padding: 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--muted-foreground);
+    border-bottom: 1px solid var(--border);
+    background-color: #f8fafc;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem;
+}
+
+.userCell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.userId {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+}
+
+.contactCell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+}
+
+.loyaltyTag {
+    background-color: #fffbeb;
+    color: #92400e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: 1px solid #fef3c7;
+}
+
+.spendCell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.detailsBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.detailsBtn:hover {
+    background-color: var(--secondary);
+}
+
+.detailsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profileSection {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profileAvatar {
+    width: 64px;
+    height: 64px;
+    background-color: var(--secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.profileInfo h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: var(--primary);
+}
+
+.joinedDate {
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.75rem;
+}
+
+.profileStats {
+    display: flex;
+    gap: 1rem;
+}
+
+.pStat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.historySection h3 {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--primary);
+}
+
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.orderRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.orderRow:hover {
+    background-color: #f1f5f9;
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.orderNum {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--primary);
+}
+
+.orderDate {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+}
+
+.orderMeta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.orderAmt {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.statusDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.orderStatus {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    min-width: 80px;
+}
+
+.modalLoader, .emptySmall {
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+.loader, .empty {
+    padding: 4rem;
+    text-align: center;
+    color: var(--muted-foreground);
+}

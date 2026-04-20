@@ -1,0 +1,77 @@
+.container {
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.previewCard {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.previewCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.removeBtn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--destructive);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.removeBtn:hover {
+    transform: scale(1.1);
+}
+
+.uploadPlaceholder {
+    aspect-ratio: 1;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--muted-foreground);
+    transition: all 0.2s;
+    background-color: #f8fafc;
+}
+
+.uploadPlaceholder:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--secondary);
+}
+
+.uploadPlaceholder span {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+}

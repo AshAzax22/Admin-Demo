@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 260px; /* Width of Sidebar */
+    transition: margin-left 0.3s ease;
+}
+
+.main {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        margin-left: 0;
+    }
+}
