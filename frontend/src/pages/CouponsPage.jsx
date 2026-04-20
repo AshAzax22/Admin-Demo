@@ -22,7 +22,7 @@ const CouponsPage = () => {
 
     const fetchCoupons = async () => {
         try {
-            const { data } = await axios.get('/api/coupons');
+            const { data } = await api.get('/coupons');
             setCoupons(data);
         } catch (error) {
             console.error('Error fetching coupons:', error);
@@ -34,7 +34,7 @@ const CouponsPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/coupons', formData);
+            await api.post('/coupons', formData);
             setIsModalOpen(false);
             setFormData({
                 code: '',

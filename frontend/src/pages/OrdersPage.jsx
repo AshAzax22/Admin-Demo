@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { 
     Search, 
     Filter, 
@@ -47,7 +47,7 @@ const OrdersPage = () => {
 
     const fetchStores = async () => {
         try {
-            const { data } = await axios.get('/api/stores');
+            const { data } = await api.get('/stores');
             setStores(data);
         } catch (error) {
             console.error('Error fetching stores:', error);
@@ -61,7 +61,7 @@ const OrdersPage = () => {
             if (statusFilter) params.status = statusFilter;
             if (storeFilter) params.storeId = storeFilter;
             
-            const { data } = await axios.get('/api/orders', { params });
+            const { data } = await api.get('/orders', { params });
             
             // Client side search filtering (on order number or customer name)
             const filtered = data.filter(order => 

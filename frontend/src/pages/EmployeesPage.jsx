@@ -74,9 +74,9 @@ const EmployeesPage = () => {
         e.preventDefault();
         try {
             if (currentEmployee) {
-                await axios.put(`/api/users/${currentEmployee._id}`, formData);
+                await api.put(`/users/${currentEmployee._id}`, formData);
             } else {
-                await axios.post('/api/users', formData);
+                await api.post('/users', formData);
             }
             fetchData();
             setIsModalOpen(false);

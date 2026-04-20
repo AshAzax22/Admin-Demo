@@ -1,11 +1,54 @@
+import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 import { useAuth } from '../context/AuthContext';
-// ... existing imports ...
+import { 
+    TrendingUp, 
+    Users, 
+    ShoppingCart, 
+    Package, 
+    ArrowUpRight, 
+    ArrowDownRight,
+    Search
+} from 'lucide-react';
+import { 
+    AreaChart, 
+    Area, 
+    XAxis, 
+    YAxis, 
+    CartesianGrid, 
+    Tooltip, 
+    ResponsiveContainer 
+} from 'recharts';
+import styles from './Dashboard.module.css';
 
-// ... StatCard component ...
+const StatCard = ({ title, value, icon, trend, trendValue, color }) => (
+    <div className={styles.card}>
+        <div className={styles.cardHeader}>
+            <div className={styles.iconWrapper} style={{ backgroundColor: `${color}15`, color: color }}>
+                {icon}
+            </div>
+            <div className={trend === 'up' ? styles.trendUp : styles.trendDown}>
+                {trend === 'up' ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
+                <span>{trendValue}%</span>
+            </div>
+        </div>
+        <div className={styles.cardBody}>
+            <h3>{value}</h3>
+            <p>{title}</p>
+        </div>
+    </div>
+);
 
 const Dashboard = () => {
-    // ... initial state ...
+    const { user } = useAuth();
+    const [stats, setStats] = useState(null);
+    const [recentOrders, setRecentOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchDashboardData();
+    }, []);
 
     const fetchDashboardData = async () => {
         setLoading(true);
@@ -18,7 +61,6 @@ const Dashboard = () => {
             setStats(analyticsRes.data);
             setRecentOrders(ordersRes.data || []);
         } catch (error) {
-// ...
             console.error('Error fetching dashboard data:', error);
             setError(error.response?.data?.message || 'Failed to load dashboard data. Please check your permissions.');
         } finally {

@@ -30,7 +30,7 @@ const AnalyticsPage = () => {
 
     const fetchStats = async () => {
         try {
-            const { data } = await axios.get('/api/analytics/dashboard');
+            const { data } = await api.get('/analytics/dashboard');
             setStats(data);
         } catch (error) {
             console.error('Error fetching analytics:', error);

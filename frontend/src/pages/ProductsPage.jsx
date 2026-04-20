@@ -45,7 +45,7 @@ const ProductsPage = () => {
 
     const fetchInitialData = async () => {
         try {
-            const { data } = await axios.get('/api/categories');
+            const { data } = await api.get('/categories');
             setCategories(data);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -58,7 +58,7 @@ const ProductsPage = () => {
             const params = {};
             if (search) params.search = search;
             if (selectedCategory) params.category = selectedCategory;
-            const { data } = await axios.get('/api/products', { params });
+            const { data } = await api.get('/products', { params });
             setProducts(data);
         } catch (error) {
             console.error('Error fetching products:', error);
