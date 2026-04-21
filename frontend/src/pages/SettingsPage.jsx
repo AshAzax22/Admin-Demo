@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { User, Store, Bell, Shield, Save } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import styles from './SettingsPage.module.css';
@@ -22,7 +22,7 @@ const SettingsPage = () => {
             setFormData({
                 name: user.name || '',
                 email: user.email || '',
-                storeName: 'Omnichannel Flagship', // Mock data for now
+                storeName: 'Omnichannel Flagship',
                 location: 'Downtown Office',
                 phone: '+1 555-0198',
                 bio: 'Managing retail operations across NY and London hubs.'
@@ -33,7 +33,12 @@ const SettingsPage = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-        alert('Settings saved successfully! (Simulation)');
+        try {
+            await api.put('/users/profile', formData);
+            alert('Settings saved successfully!');
+        } catch (error) {
+            alert('Failed to save settings.');
+        }
     };
 
     if (loading) return <div className={styles.loader}>Loading settings...</div>;

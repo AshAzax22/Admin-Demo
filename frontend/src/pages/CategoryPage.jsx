@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { Plus, Trash2, Edit2, AlertCircle } from 'lucide-react';
 import Modal from '../components/ui/Modal';
 import ConfirmModal from '../components/ui/ConfirmModal';
@@ -28,7 +28,7 @@ const CategoryPage = () => {
 
     const fetchCategories = async () => {
         try {
-            const { data } = await axios.get('/api/categories');
+            const { data } = await api.get('/categories');
             setCategories(data);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -62,9 +62,9 @@ const CategoryPage = () => {
         setSubmitting(true);
         try {
             if (editingCategory) {
-                await axios.put(`/api/categories/${editingCategory._id}`, formData);
+                await api.put(`/categories/${editingCategory._id}`, formData);
             } else {
-                await axios.post('/api/categories', formData);
+                await api.post('/categories', formData);
             }
             setIsFormModalOpen(false);
             resetForm();
@@ -79,7 +79,7 @@ const CategoryPage = () => {
     const handleDelete = async () => {
         if (!categoryToDelete) return;
         try {
-            await axios.delete(`/api/categories/${categoryToDelete._id}`);
+            await api.delete(`/categories/${categoryToDelete._id}`);
             fetchCategories();
         } catch (error) {
             alert(error.response?.data?.message || 'Failed to delete category');
@@ -120,7 +120,7 @@ const CategoryPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {categories.map((cat) => (
+                                {(categories || []).map((cat) => (
                                     <tr key={cat._id}>
                                         <td className={styles.catName}>
                                             {cat.parent ? '— ' : ''}{cat.name}
@@ -185,7 +185,7 @@ const CategoryPage = () => {
                             onChange={(e) => setFormData({...formData, parent: e.target.value})}
                         >
                             <option value="">None (Top Level)</option>
-                            {categories
+                            {(categories || [])
                                 .filter(c => c._id !== editingCategory?._id)
                                 .map(c => (
                                     <option key={c._id} value={c._id}>

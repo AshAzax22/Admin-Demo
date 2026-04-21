@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { Plus, Search, Filter, Edit2, Trash2, Tag, Layers, IndianRupee, Image as ImageIcon } from 'lucide-react';
 import Modal from '../components/ui/Modal';
 import ConfirmModal from '../components/ui/ConfirmModal';
@@ -103,9 +103,9 @@ const ProductsPage = () => {
             };
 
             if (editingProduct) {
-                await axios.put(`/api/products/${editingProduct._id}`, payload);
+                await api.put(`/products/${editingProduct._id}`, payload);
             } else {
-                await axios.post('/api/products', payload);
+                await api.post('/products', payload);
             }
 
             setIsFormModalOpen(false);
@@ -121,7 +121,7 @@ const ProductsPage = () => {
     const handleDelete = async () => {
         if (!productToDelete) return;
         try {
-            await axios.delete(`/api/products/${productToDelete._id}`);
+            await api.delete(`/products/${productToDelete._id}`);
             fetchProducts();
         } catch (error) {
             alert('Failed to delete product');
@@ -158,7 +158,7 @@ const ProductsPage = () => {
                         onChange={(e) => setSelectedCategory(e.target.value)}
                     >
                         <option value="">All Categories</option>
-                        {categories.map(c => (
+                        {(categories || []).map(c => (
                             <option key={c._id} value={c._id}>
                                 {c.parent ? '— ' : ''}{c.name}
                             </option>
@@ -183,7 +183,7 @@ const ProductsPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map((prod) => (
+                            {(products || []).map((prod) => (
                                 <tr key={prod._id}>
                                     <td className={styles.productCell}>
                                         <div className={styles.prodImg}>
@@ -240,7 +240,7 @@ const ProductsPage = () => {
                             ))}
                         </tbody>
                     </table>
-                    {products.length === 0 && <div className={styles.empty}>No products found.</div>}
+                    {(products || []).length === 0 && <div className={styles.empty}>No products found.</div>}
                 </div>
             )}
 
@@ -291,7 +291,7 @@ const ProductsPage = () => {
                                 onChange={(e) => setFormData({...formData, category: e.target.value})}
                             >
                                 <option value="">Select Category</option>
-                                {categories.map(c => (
+                                {(categories || []).map(c => (
                                     <option key={c._id} value={c._id}>
                                         {c.parent ? '— ' : ''}{c.name}
                                     </option>

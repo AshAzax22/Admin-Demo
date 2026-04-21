@@ -167,10 +167,10 @@ const Dashboard = () => {
                         <h2>Recent Orders</h2>
                     </div>
                     <div className={styles.orderList}>
-                        {recentOrders.length === 0 ? (
+                        {(recentOrders || []).length === 0 ? (
                             <p className={styles.empty}>No recent orders.</p>
                         ) : (
-                            recentOrders.map(order => (
+                            (recentOrders || []).map(order => (
                                 <div key={order._id} className={styles.orderRow}>
                                     <div className={styles.orderInfo}>
                                         <span className={styles.orderNum}>{order.orderNumber}</span>
@@ -192,7 +192,7 @@ const Dashboard = () => {
                             <h2>Top Stores</h2>
                         </div>
                         <div className={styles.storeList}>
-                            {stats?.storePerformance.sort((a,b) => b.revenue - a.revenue).slice(0, 4).map(store => (
+                            {(stats?.storePerformance || []).sort((a,b) => b.revenue - a.revenue).slice(0, 4).map(store => (
                                 <div key={store._id} className={styles.storeRow}>
                                     <div className={styles.storeName}>{store.name}</div>
                                     <div className={styles.storeVal}>₹{store.revenue.toLocaleString()}</div>

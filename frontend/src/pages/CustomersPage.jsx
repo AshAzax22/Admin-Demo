@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { Search, User, Mail, Phone, Trophy, CreditCard, ChevronRight, ShoppingBag, Clock } from 'lucide-react';
 import Modal from '../components/ui/Modal';
 import styles from './CustomersPage.module.css';
@@ -30,7 +30,7 @@ const CustomersPage = () => {
     const fetchCustomers = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/api/customers', {
+            const { data } = await api.get('/customers', {
                 params: { search }
             });
             setCustomers(data);
@@ -46,7 +46,7 @@ const CustomersPage = () => {
         setIsDetailsModalOpen(true);
         setLoadingOrders(true);
         try {
-            const { data } = await axios.get('/api/orders', {
+            const { data } = await api.get('/orders', {
                 params: { customerId: customer._id }
             });
             setCustomerOrders(data);
@@ -93,7 +93,7 @@ const CustomersPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {customers.map((customer) => (
+                            {(customers || []).map((customer) => (
                                 <tr key={customer._id}>
                                     <td>
                                         <div className={styles.userCell}>
@@ -179,11 +179,11 @@ const CustomersPage = () => {
                             <h3>Order History</h3>
                             {loadingOrders ? (
                                 <div className={styles.modalLoader}>Retrieving purchase history...</div>
-                            ) : customerOrders.length === 0 ? (
+                            ) : (customerOrders || []).length === 0 ? (
                                 <p className={styles.emptySmall}>No order history found for this store.</p>
                             ) : (
                                 <div className={styles.ordersList}>
-                                    {customerOrders.map(order => (
+                                    {(customerOrders || []).map(order => (
                                         <div key={order._id} className={styles.orderRow}>
                                             <div className={styles.orderInfo}>
                                                 <span className={styles.orderNum}>{order.orderNumber}</span>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { Plus, Tag, Calendar, Users, Trash2, CheckCircle, XCircle } from 'lucide-react';
 import styles from './CouponsPage.module.css';
 
@@ -22,6 +22,10 @@ const CouponsPage = () => {
 
     const fetchCoupons = async () => {
         try {
+            const [ordersRes, productsRes] = await Promise.all([
+                api.get('/orders'),
+                api.get('/products')
+            ]);
             const { data } = await api.get('/coupons');
             setCoupons(data);
         } catch (error) {
@@ -53,7 +57,7 @@ const CouponsPage = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Delete this coupon?')) return;
         try {
-            await axios.delete(`/api/coupons/${id}`);
+            await api.delete(`/coupons/${id}`);
             fetchCoupons();
         } catch (error) {
             alert('Failed to delete coupon');
@@ -77,7 +81,7 @@ const CouponsPage = () => {
                 <div className={styles.loader}>Loading coupons...</div>
             ) : (
                 <div className={styles.grid}>
-                    {coupons.map((coupon) => (
+                    {(coupons || []).map((coupon) => (
                         <div key={coupon._id} className={styles.card}>
                             <div className={styles.cardHeader}>
                                 <div className={styles.codeBadge}>

@@ -48,13 +48,17 @@ const AppRoutes = () => {
     );
 };
 
+import ErrorBoundary from './components/ui/ErrorBoundary';
+
 function App() {
     return (
-        <AuthProvider>
-            <Router>
-                <AppRoutes />
-            </Router>
-        </AuthProvider>
+        <ErrorBoundary>
+            <AuthProvider>
+                <Router>
+                    <AppRoutes />
+                </Router>
+            </AuthProvider>
+        </ErrorBoundary>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { Plus, MapPin, Phone, Edit2, Trash2, Store as StoreIcon } from 'lucide-react';
 import Modal from '../components/ui/Modal';
 import ConfirmModal from '../components/ui/ConfirmModal';
@@ -32,7 +32,7 @@ const StoresPage = () => {
 
     const fetchStores = async () => {
         try {
-            const { data } = await axios.get('/api/stores');
+            const { data } = await api.get('/stores');
             setStores(data);
         } catch (error) {
             console.error('Error fetching stores:', error);
@@ -66,9 +66,9 @@ const StoresPage = () => {
         setSubmitting(true);
         try {
             if (editingStore) {
-                await axios.put(`/api/stores/${editingStore._id}`, formData);
+                await api.put(`/stores/${editingStore._id}`, formData);
             } else {
-                await axios.post('/api/stores', formData);
+                await api.post('/stores', formData);
             }
             setIsFormModalOpen(false);
             resetForm();
@@ -83,7 +83,7 @@ const StoresPage = () => {
     const handleDelete = async () => {
         if (!storeToDelete) return;
         try {
-            await axios.delete(`/api/stores/${storeToDelete._id}`);
+            await api.delete(`/stores/${storeToDelete._id}`);
             fetchStores();
         } catch (error) {
             alert('Failed to delete store');
@@ -95,7 +95,7 @@ const StoresPage = () => {
         setLoadingInsights(true);
         setIsInsightsModalOpen(true);
         try {
-            const { data } = await axios.get(`/api/stores/${store._id}/insights`);
+            const { data } = await api.get(`/stores/${store._id}/insights`);
             setStoreInsights(data);
         } catch (error) {
             console.error('Error fetching store insights:', error);
@@ -122,7 +122,7 @@ const StoresPage = () => {
                 <div className={styles.loader}>Loading stores...</div>
             ) : (
                 <div className={styles.grid}>
-                    {stores.map((store) => (
+                    {(stores || []).map((store) => (
                         <div key={store._id} className={styles.card} onClick={() => handleViewInsights(store)}>
                             <div className={styles.cardInfo}>
                                 <div className={styles.storeIcon}>
@@ -159,7 +159,7 @@ const StoresPage = () => {
                             )}
                         </div>
                     ))}
-                    {stores.length === 0 && <div className={styles.empty}>No stores found.</div>}
+                    {(stores || []).length === 0 && <div className={styles.empty}>No stores found.</div>}
                 </div>
             )}
 
@@ -191,10 +191,10 @@ const StoresPage = () => {
                         <div className={styles.insightSection}>
                             <h4>Assigned Staff</h4>
                             <div className={styles.staffList}>
-                                {storeInsights.staff.length === 0 ? (
+                                {(storeInsights.staff || []).length === 0 ? (
                                     <p className={styles.emptySmall}>No staff assigned to this location.</p>
                                 ) : (
-                                    storeInsights.staff.map(member => (
+                                    (storeInsights.staff || []).map(member => (
                                         <div key={member._id} className={styles.staffRow}>
                                             <div className={styles.memberInfo}>
                                                 <span className={member.role === 'Store Manager' ? styles.manager : styles.staff}>

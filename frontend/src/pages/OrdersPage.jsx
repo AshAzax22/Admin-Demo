@@ -80,7 +80,7 @@ const OrdersPage = () => {
     const handleStatusUpdate = async (id, newStatus) => {
         setUpdatingId(id);
         try {
-            await axios.patch(`/api/orders/${id}`, { status: newStatus });
+            await api.patch(`/orders/${id}`, { status: newStatus });
             fetchOrders();
         } catch (error) {
             alert('Failed to update status');
@@ -114,7 +114,7 @@ const OrdersPage = () => {
                         <Filter size={18} className={styles.filterIcon} />
                         <select value={storeFilter} onChange={(e) => setStoreFilter(e.target.value)}>
                             <option value="">All Stores</option>
-                            {stores.map(s => <option key={s._id} value={s._id}>{s.name}</option>)}
+                            {(stores || []).map(s => <option key={s._id} value={s._id}>{s.name}</option>)}
                         </select>
                     </div>
                 )}
@@ -143,7 +143,7 @@ const OrdersPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {orders.map((order) => (
+                            {(orders || []).map((order) => (
                                 <tr key={order._id}>
                                     <td>
                                         <div className={styles.orderCell}>
@@ -195,7 +195,7 @@ const OrdersPage = () => {
                             ))}
                         </tbody>
                     </table>
-                    {orders.length === 0 && <div className={styles.empty}>No orders found.</div>}
+                    {(orders || []).length === 0 && <div className={styles.empty}>No orders found.</div>}
                 </div>
             )}
         </div>

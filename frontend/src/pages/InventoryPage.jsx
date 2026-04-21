@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { 
     Search, 
     Filter, 
@@ -37,7 +37,7 @@ const InventoryPage = () => {
 
     const fetchStores = async () => {
         try {
-            const { data } = await axios.get('/api/stores');
+            const { data } = await api.get('/stores');
             setStores(data);
         } catch (error) {
             console.error('Error fetching stores:', error);
@@ -49,7 +49,7 @@ const InventoryPage = () => {
         try {
             const params = {};
             if (selectedStore) params.storeId = selectedStore;
-            const { data } = await axios.get('/api/inventory', { params });
+            const { data } = await api.get('/inventory', { params });
             
             // Client side search filtering
             const filtered = data.filter(item => 
@@ -76,13 +76,13 @@ const InventoryPage = () => {
         setUpdating(true);
         try {
             if (adjustment.type === 'set') {
-                await axios.post('/api/inventory', {
+                await api.post('/inventory', {
                     productId: selectedItem.product._id,
                     storeId: selectedItem.store._id,
                     stock: adjustment.amount
                 });
             } else {
-                await axios.post('/api/inventory/adjust', {
+                await api.post('/inventory/adjust', {
                     productId: selectedItem.product._id,
                     storeId: selectedItem.store._id,
                     delta: adjustment.type === 'add' ? adjustment.amount : -adjustment.amount
@@ -124,7 +124,7 @@ const InventoryPage = () => {
                             onChange={(e) => setSelectedStore(e.target.value)}
                         >
                             <option value="">All Stores</option>
-                            {stores.map(s => (
+                            {(stores || []).map(s => (
                                 <option key={s._id} value={s._id}>{s.name}</option>
                             ))}
                         </select>
@@ -151,7 +151,7 @@ const InventoryPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {inventory.map((item) => (
+                            {(inventory || []).map((item) => (
                                 <tr key={item._id}>
                                     <td>
                                         <div className={styles.prodCell}>
@@ -198,7 +198,7 @@ const InventoryPage = () => {
                         </tbody>
                     </table>
                 )}
-                {!loading && inventory.length === 0 && (
+                {!loading && (inventory || []).length === 0 && (
                     <div className={styles.empty}>No inventory records found for the current filters.</div>
                 )}
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import { Plus, Edit2, Trash2, UserPlus, Mail, Shield, Store } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import styles from './EmployeesPage.module.css';
@@ -34,8 +34,8 @@ const EmployeesPage = () => {
         setError(null);
         try {
             const [empRes, storeRes] = await Promise.all([
-                axios.get('/api/users'),
-                axios.get('/api/stores')
+                api.get('/users'),
+                api.get('/stores')
             ]);
             setEmployees(empRes.data);
             setStores(storeRes.data);
@@ -87,7 +87,7 @@ const EmployeesPage = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`/api/users/${employeeToDelete._id}`);
+            await api.delete(`/users/${employeeToDelete._id}`);
             fetchData();
             setIsDeleteModalOpen(false);
         } catch (error) {
@@ -134,7 +134,7 @@ const EmployeesPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map(emp => (
+                        {(employees || []).map(emp => (
                             <tr key={emp._id}>
                                 <td>
                                     <div className={styles.employeeInfo}>
@@ -228,7 +228,7 @@ const EmployeesPage = () => {
                                 required={formData.role !== 'Super Admin'}
                             >
                                 <option value="">Select a store</option>
-                                {stores.map(store => (
+                                {(stores || []).map(store => (
                                     <option key={store._id} value={store._id}>
                                         {store.name} - {store.location}
                                     </option>
