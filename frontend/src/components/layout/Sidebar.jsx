@@ -10,7 +10,8 @@ import {
     BarChart3, 
     Settings,
     Store,
-    MapPin
+    MapPin,
+    X
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Sidebar.module.css';
@@ -29,7 +30,7 @@ const navItems = [
     { name: 'Settings', icon: <Settings size={20} />, path: '/settings', roles: ['Super Admin'] },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
     const { user } = useAuth();
 
     const filteredItems = navItems.filter(item => 
@@ -37,26 +38,38 @@ const Sidebar = () => {
     );
 
     return (
-        <aside className={styles.sidebar}>
-            <div className={styles.logo}>
-                <Store size={24} color="var(--primary)" />
-                <span>OmniRetail</span>
-            </div>
-            <nav className={styles.nav}>
-                {filteredItems.map((item) => (
-                    <NavLink 
-                        key={item.name} 
-                        to={item.path}
-                        className={({ isActive }) => 
-                            isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
-                        }
-                    >
-                        {item.icon}
-                        <span>{item.name}</span>
-                    </NavLink>
-                ))}
-            </nav>
-        </aside>
+        <>
+            <div 
+                className={`${styles.backdrop} ${isOpen ? styles.backdropVisible : ''}`} 
+                onClick={onClose}
+            />
+            <aside className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
+                <div className={styles.header}>
+                    <div className={styles.logo}>
+                        <Store size={24} color="var(--primary)" />
+                        <span>OmniRetail</span>
+                    </div>
+                    <button className={styles.closeBtn} onClick={onClose} aria-label="Close Sidebar">
+                        <X size={24} />
+                    </button>
+                </div>
+                <nav className={styles.nav}>
+                    {filteredItems.map((item) => (
+                        <NavLink 
+                            key={item.name} 
+                            to={item.path}
+                            className={({ isActive }) => 
+                                isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
+                            }
+                            onClick={onClose}
+                        >
+                            {item.icon}
+                            <span>{item.name}</span>
+                        </NavLink>
+                    ))}
+                </nav>
+            </aside>
+        </>
     );
 };
 

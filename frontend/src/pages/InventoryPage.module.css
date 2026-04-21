@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .header h1 {
@@ -89,13 +89,15 @@
     background-color: var(--card);
     border-radius: var(--radius);
     border: 1px solid var(--border);
-    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    min-width: 800px;
 }
 
 .table th {
@@ -206,9 +208,9 @@
 
 .modal {
     background-color: var(--card);
-    width: 100%;
+    width: 90%;
     max-width: 450px;
-    padding: 2.5rem;
+    padding: 2rem;
     border-radius: 1rem;
 }
 
@@ -300,4 +302,27 @@
     padding: 4rem;
     text-align: center;
     color: var(--muted-foreground);
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filterWrapper {
+        width: 100%;
+    }
+    
+    .modal {
+        padding: 1.5rem;
+    }
+    
+    .modalActions {
+        flex-direction: column;
+    }
+    
+    .modalActions button {
+        width: 100%;
+    }
 }

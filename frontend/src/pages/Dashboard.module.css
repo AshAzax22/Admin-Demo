@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .welcome h1 {
@@ -17,7 +17,7 @@
 
 .statsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
 }
 
@@ -253,8 +253,43 @@
     transform: scale(1.05);
 }
 
+/* Response Media Queries */
+@media (max-width: 1280px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 1024px) {
     .contentGrid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        gap: 1.5rem;
+    }
+    
+    .welcome h1 {
+        font-size: 1.25rem;
+    }
+    
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .card {
+        padding: 1.25rem;
+    }
+    
+    .chartSection {
+        padding: 1rem;
+    }
+    
+    .recentOrders, .storePerformance {
+        padding: 1.25rem;
+        min-height: auto;
     }
 }

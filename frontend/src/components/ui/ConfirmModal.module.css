@@ -65,3 +65,9 @@
 
 .confirmBtn.info { background-color: #3b82f6; }
 .confirmBtn.info:hover { background-color: #2563eb; }
+
+@media (max-width: 480px) {
+    .actions {
+        flex-direction: column;
+    }
+}

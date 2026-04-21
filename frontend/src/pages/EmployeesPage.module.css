@@ -25,20 +25,23 @@
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .tableContainer {
     background-color: var(--card);
     border: 1px solid var(--border);
     border-radius: 1rem;
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: var(--shadow-sm);
+    -webkit-overflow-scrolling: touch;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    min-width: 800px;
 }
 
 .table th {
@@ -227,4 +230,41 @@
 .tip {
     font-size: 0.8125rem;
     color: var(--muted-foreground);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .addBtn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .formGroup.full {
+        grid-column: span 1;
+    }
+    
+    .modalFooter {
+        flex-direction: column;
+    }
+    
+    .modalFooter button {
+        width: 100%;
+    }
 }

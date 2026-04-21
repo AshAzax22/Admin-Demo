@@ -177,3 +177,48 @@
     text-align: center;
     color: var(--muted-foreground);
 }
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .navBtn {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .content {
+        padding: 1.5rem;
+    }
+    
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .formGroup.full {
+        grid-column: span 1;
+    }
+    
+    .profileHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .saveBtn {
+        width: 100%;
+    }
+}

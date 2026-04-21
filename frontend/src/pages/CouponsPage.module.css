@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .header {
@@ -151,9 +151,9 @@
 
 .modal {
     background-color: var(--card);
-    width: 100%;
+    width: 90%;
     max-width: 500px;
-    padding: 2.5rem;
+    padding: 2rem;
     border-radius: 1rem;
 }
 
@@ -220,4 +220,37 @@
     padding: 4rem;
     text-align: center;
     color: var(--muted-foreground);
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .addBtn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .row {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal {
+        padding: 1.5rem;
+    }
+    
+    .modalActions {
+        flex-direction: column;
+    }
+    
+    .modalActions button {
+        width: 100%;
+    }
 }

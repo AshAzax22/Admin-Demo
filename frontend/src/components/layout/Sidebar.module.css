@@ -9,7 +9,15 @@
     left: 0;
     top: 0;
     background-color: var(--background);
-    z-index: 50;
+    z-index: 100;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
 }
 
 .logo {
@@ -18,8 +26,16 @@
     gap: 0.75rem;
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 2.5rem;
     font-family: var(--font-heading);
+}
+
+.closeBtn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 0.25rem;
 }
 
 .nav {
@@ -49,8 +65,33 @@
     color: var(--primary-foreground) !important;
 }
 
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.backdropVisible {
+    opacity: 1;
+    visibility: visible;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
+    }
+
+    .sidebarOpen {
+        transform: translateX(0);
+        box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    }
+
+    .closeBtn {
+        display: flex;
     }
 }
